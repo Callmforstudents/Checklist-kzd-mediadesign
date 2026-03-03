@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checklist Examen Experience Design</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; line-height: 1.35; }
+    .wrap { max-width: 980px; margin: 0 auto; }
+    h1 { font-size: 24px; margin: 0 0 8px; }
+    .sub { color: #444; margin: 0 0 16px; }
+    .card { border: 1px solid #ddd; border-radius: 14px; padding: 16px; margin: 14px 0; }
+    .section-title { font-size: 18px; margin: 0 0 10px; }
+    .item { display: grid; grid-template-columns: 1fr 220px; gap: 12px; align-items: start; padding: 10px 0; border-top: 1px dashed #eee; }
+    .item:first-of-type { border-top: 0; }
+    .small { color: #555; font-size: 13px; margin-top: 4px; }
+    select, input[type="text"] { width: 100%; padding: 8px; border-radius: 10px; border: 1px solid #ccc; }
+    .topbar { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 8px; }
+    button { padding: 10px 12px; border: 1px solid #222; border-radius: 12px; background: #111; color: white; cursor: pointer; }
+    button.secondary { background: white; color: #111; }
+    .note { font-size: 13px; color: #444; }
+    .summary { border-left: 4px solid #111; padding: 10px 12px; background: #fafafa; border-radius: 12px; margin-top: 12px; }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; border: 1px solid #ddd; margin-right: 6px; font-size: 12px; }
+    .muted { color:#666; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Checklist Examen Experience Design</h1>
+  <p class="sub">Vul eerlijk in. Download daarna je ingevulde checklist als CSV (openen in Excel kan gewoon).</p>
+
+  <div class="topbar card">
+    <div>
+      <label><strong>Naam student</strong></label>
+      <input id="studentName" type="text" placeholder="Bijv. Sam Jansen" />
+      <div class="small">Optioneel, maar handig op je download.</div>
+    </div>
+    <div>
+      <label><strong>Datum</strong></label>
+      <input id="dateField" type="text" placeholder="Bijv. 03-03-2026" />
+      <div class="small">Tip: laat leeg als je geen zin hebt, ik vul ’m automatisch in.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Schaal</div>
+    <div class="note">
+      Kies per punt: <span class="badge">Ja</span><span class="badge">Een beetje</span><span class="badge">Behoorlijk goed</span><span class="badge">Helemaal goed</span>
+    </div>
+  </div>
+
+  <!-- DEEL 1 -->
+  <div class="card">
+    <div class="section-title">Deel 1 – Onderzoek, Concept, Plan & Ontwerp</div>
+    <p class="muted">In dit deel laat je zien dat je strategisch kunt denken en je keuzes kunt onderbouwen.</p>
+
+    <h3>1. Onderzoek</h3>
+    <div class="item" data-deel="1" data-blok="Onderzoek" data-id="1">
+      <div>Ik kan duidelijk uitleggen wat dit merk uniek maakt (niet algemeen, maar specifiek).</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="1" data-blok="Onderzoek" data-id="2">
+      <div>Ik kan mijn doelgroep beschrijven als een echt persoon (leeftijd, gedrag, behoeften, motivatie).</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="1" data-blok="Onderzoek" data-id="3">
+      <div>Ik heb onderzocht wat concurrenten doen en kan uitleggen wat mijn merk anders doet.</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="1" data-blok="Onderzoek" data-id="4">
+      <div>Ik heb trends gekozen die echt invloed hebben op mijn doelgroep of merk (niet zomaar iets hip).</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="1" data-blok="Onderzoek" data-id="5">
+      <div>Ik heb mijn onderzoek afgesloten met duidelijke conclusies die richting geven aan mijn concept.</div>
+      <select></select>
+    </div>
+
+    <h3>2. Communicatieconcept</h3>
+    <div class="item" data-deel="1" data-blok="Communicatieconcept" data-id="6">
+      <div>Ik kan mijn communicatieconcept in één duidelijke zin uitleggen.</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="1" data-blok="Communicatieconcept" data-id="7">
+      <div>Mijn concept sluit logisch aan op mijn doelgroep en merk.</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="1" data-blok="Communicatieconcept" data-id="8">
+      <div>Mijn concept is niet algemeen (zoals “verbinden” of “duurzaam”), maar concreet en herkenbaar.</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="1" data-blok="Communicatieconcept" data-id="9">
+      <div>Mijn concept geeft richting aan alle keuzes die ik daarna maak.</div>
+      <select></select>
+    </div>
+
+    <h3>3. Creatief concept & merkbelofte</h3>
+    <div class="item" data-deel="1" data-blok="Creatief concept & merkbelofte" data-id="10">
+      <div>Mijn creatieve idee versterkt mijn communicatieconcept.</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="1" data-blok="Creatief concept & merkbelofte" data-id="11">
+      <div>Mijn beeldtaal (kleur, vorm, typografie, stijl) past bij de merkbelofte.</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="1" data-blok="Creatief concept & merkbelofte" data-id="12">
+      <div>Mijn uitingen lijken duidelijk bij elkaar te horen (één stijl, één sfeer).</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="1" data-blok="Creatief concept & merkbelofte" data-id="13">
+      <div>Mijn ontwerpen zijn geen losse ideeën, maar vormen samen één herkenbare campagne.</div>
+      <select></select>
+    </div>
+
+    <h3>4. Campagne-acties & mediaplan</h3>
+    <div class="item" data-deel="1" data-blok="Campagne-acties & mediaplan" data-id="14">
+      <div>Mijn acties passen bij mijn doelgroep (ik kies media waar zij echt komen).</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="1" data-blok="Campagne-acties & mediaplan" data-id="15">
+      <div>Ik kan uitleggen waarom ik deze middelen inzet.</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="1" data-blok="Campagne-acties & mediaplan" data-id="16">
+      <div>Mijn campagne-opbouw is logisch (wat gebeurt eerst, wat daarna?).</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="1" data-blok="Campagne-acties & mediaplan" data-id="17">
+      <div>Mijn planning is realistisch binnen de examenduur.</div>
+      <select></select>
+    </div>
+  </div>
+
+  <!-- DEEL 2 -->
+  <div class="card">
+    <div class="section-title">Deel 2 – Realisatie & Presentatie</div>
+    <p class="muted">In dit deel laat je zien dat je het kunt maken én overtuigend kunt presenteren.</p>
+
+    <h3>5. Realisatie</h3>
+    <div class="item" data-deel="2" data-blok="Realisatie" data-id="18">
+      <div>Mijn ontwerpen zijn technisch netjes uitgewerkt (uitlijning, beeldkwaliteit, typografie).</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="2" data-blok="Realisatie" data-id="19">
+      <div>Mijn werk ziet eruit alsof het echt gebruikt kan worden (geen schetsniveau).</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="2" data-blok="Realisatie" data-id="20">
+      <div>Mijn uitingen versterken samen de beleving van het merk.</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="2" data-blok="Realisatie" data-id="21">
+      <div>Mijn werk laat zien wie ik ben als ontwerper (eigenheid).</div>
+      <select></select>
+    </div>
+
+    <h3>6. Presentatie</h3>
+    <div class="item" data-deel="2" data-blok="Presentatie" data-id="22">
+      <div>Mijn presentatie heeft een duidelijke opbouw (onderzoek → concept → uitwerking → campagne).</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="2" data-blok="Presentatie" data-id="23">
+      <div>Ik kan mijn keuzes rustig en vakinhoudelijk uitleggen.</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="2" data-blok="Presentatie" data-id="24">
+      <div>Ik raak niet in paniek bij kritische vragen, maar gebruik ze om mijn verhaal sterker te maken.</div>
+      <select></select>
+    </div>
+    <div class="item" data-deel="2" data-blok="Presentatie" data-id="25">
+      <div>Mijn presentatie ziet er verzorgd en professioneel uit (geen rommelige slides).</div>
+      <select></select>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" id="btnDownload">Download als CSV (Excel)</button>
+    <button type="button" class="secondary" id="btnReset">Reset alles</button>
+  </div>
+
+  <div class="summary" id="summaryBox" aria-live="polite"></div>
+
+  <p class="note">
+    Tip: CSV opent in Excel. Als komma’s lastig doen op Windows/NL (scheidingsteken), gebruik ik hieronder automatisch <strong>puntkomma</strong> als separator. Da’s meestal precies goed.
+  </p>
+</div>
+
+<script>
+  const OPTIONS = ["", "Ja", "Een beetje", "Behoorlijk goed", "Helemaal goed"];
+  const SCORE = { "": "", "Ja": 1, "Een beetje": 2, "Behoorlijk goed": 3, "Helemaal goed": 4 };
+
+  // Prefill date
+  const dateField = document.getElementById("dateField");
+  if (!dateField.value) {
+    const d = new Date();
+    const dd = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const yyyy = d.getFullYear();
+    dateField.value = `${dd}-${mm}-${yyyy}`;
+  }
+
+  // Fill selects
+  document.querySelectorAll(".item select").forEach(sel => {
+    OPTIONS.forEach(opt => {
+      const o = document.createElement("option");
+      o.value = opt;
+      o.textContent = opt === "" ? "— kies —" : opt;
+      sel.appendChild(o);
+    });
+    sel.addEventListener("change", updateSummary);
+  });
+
+  function collectRows() {
+    const name = document.getElementById("studentName").value.trim();
+    const date = document.getElementById("dateField").value.trim();
+
+    const rows = [];
+    document.querySelectorAll(".item").forEach(item => {
+      const deel = item.dataset.deel;
+      const blok = item.dataset.blok;
+      const id = item.dataset.id;
+      const tekst = item.querySelector("div").textContent.trim();
+      const keuze = item.querySelector("select").value;
+      const score = SCORE[keuze];
+
+      rows.push({
+        student: name,
+        datum: date,
+        deel,
+        blok,
+        nr: id,
+        criterium: tekst,
+        antwoord: keuze,
+        score
+      });
+    });
+
+    return rows;
+  }
+
+  function csvEscape(value) {
+    const v = String(value ?? "");
+    // escape quotes for CSV
+    const escaped = v.replace(/"/g, '""');
+    return `"${escaped}"`;
+  }
+
+  function toCSV(rows) {
+    const sep = ";"; // NL-friendly for Excel
+    const header = ["Student", "Datum", "Deel", "Blok", "Nr", "Criterium", "Antwoord", "Score"];
+    const lines = [header.map(csvEscape).join(sep)];
+
+    rows.forEach(r => {
+      const line = [
+        r.student, r.datum, r.deel, r.blok, r.nr, r.criterium, r.antwoord, r.score
+      ].map(csvEscape).join(sep);
+      lines.push(line);
+    });
+
+    return lines.join("\n");
+  }
+
+  function updateSummary() {
+    const rows = collectRows();
+    const filled = rows.filter(r => r.antwoord !== "").length;
+    const total = rows.length;
+
+    const perDeel = { "1": [], "2": [] };
+    rows.forEach(r => { if (r.score !== "") perDeel[r.deel].push(Number(r.score)); });
+
+    const avg = arr => arr.length ? (arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(2) : "—";
+
+    const box = document.getElementById("summaryBox");
+    box.innerHTML = `
+      <strong>Samenvatting</strong><br>
+      Ingevuld: <strong>${filled}</strong> van <strong>${total}</strong><br>
+      Gemiddelde score Deel 1: <strong>${avg(perDeel["1"])}</strong> / 4<br>
+      Gemiddelde score Deel 2: <strong>${avg(perDeel["2"])}</strong> / 4<br>
+      <span class="muted">Tip: alles onder “Behoorlijk goed” is jouw verbeterlijstje.</span>
+    `;
+  }
+  updateSummary();
+
+  document.getElementById("btnDownload").addEventListener("click", () => {
+    const rows = collectRows();
+    const csv = toCSV(rows);
+
+    const name = (document.getElementById("studentName").value.trim() || "student")
+      .replace(/[^\w\-]+/g, "_");
+    const date = (document.getElementById("dateField").value.trim() || "datum")
+      .replace(/[^\w\-]+/g, "_");
+
+    const filename = `Checklist_ExperienceDesign_${name}_${date}.csv`;
+
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  });
+
+  document.getElementById("btnReset").addEventListener("click", () => {
+    if (!confirm("Alles leegmaken?")) return;
+    document.querySelectorAll(".item select").forEach(sel => sel.value = "");
+    updateSummary();
+  });
+</script>
+</body>
+</html>
