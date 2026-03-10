@@ -1,1 +1,529 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zelfevaluatie – Campagne Assessment</title>
 
+<style>
+  :root {
+    --bg: #f5f0e8;
+    --paper: #fdfbf7;
+    --ink: #1a1612;
+    --muted: #7a7268;
+    --accent: #c4410c;
+    --accent-light: #f8ede6;
+    --border: #e0d9ce;
+    --shadow: 0 2px 12px rgba(26,22,18,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 0 0 90px;
+  }
+
+  .header {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.15;
+  }
+  .header-inner { max-width: 860px; margin: 0 auto; position: relative; }
+  .header h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .header h1 span { color: var(--accent); font-style: italic; }
+  .header p {
+    margin-top: 12px;
+    font-size: 0.95rem;
+    color: #b5afa6;
+    max-width: 520px;
+    line-height: 1.6;
+  }
+
+  .name-bar {
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 40px;
+  }
+  .name-bar-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .name-bar label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .name-bar input {
+    flex: 1;
+    min-width: 200px;
+    max-width: 360px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    background: var(--bg);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .name-bar input:focus { border-color: var(--accent); }
+
+  .scale-bar {
+    background: var(--accent-light);
+    border-bottom: 2px solid #e9c4b2;
+    padding: 14px 40px;
+  }
+  .scale-bar-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .scale-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .scale-options {
+    font-size: 0.83rem;
+    color: var(--ink);
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .scale-sep { color: #c8bfb3; }
+
+  .main { max-width: 860px; margin: 40px auto; padding: 0 40px; }
+
+  .deel-heading {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 900;
+    font-size: 1.65rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 48px 0 4px;
+    line-height: 1.2;
+  }
+  .deel-heading:first-child { margin-top: 0; }
+  .deel-sub {
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .section-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .section-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 18px 24px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px; height: 26px;
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 50%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  .criteria-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .criteria-row:last-child { border-bottom: none; }
+  .criteria-row:hover { background: #f9f7f4; }
+
+  .criteria-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .score-select {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 36px 9px 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--bg);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7268' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    color: var(--ink);
+    cursor: pointer;
+    outline: none;
+    min-width: 230px;
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+  .score-select:focus { border-color: var(--accent); }
+  .score-select.val-nee        { border-color: #e74c3c; background-color: #fde8e6; }
+  .score-select.val-redelijk   { border-color: #e67e22; background-color: #fef0e3; }
+  .score-select.val-behoorlijk { border-color: #27ae60; background-color: #e6f4ec; }
+  .score-select.val-vragen     { border-color: #2980b9; background-color: #e4eef8; }
+
+  .score-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    z-index: 100;
+    flex-wrap: wrap;
+  }
+  .score-info { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .score-main { font-family: Georgia, 'Times New Roman', serif; font-size: 1.4rem; font-weight: 900; }
+  .score-main span { color: var(--accent); font-style: italic; }
+  .progress-wrap { display: flex; align-items: center; gap: 10px; }
+  .progress-track { width: 160px; height: 6px; background: #3a3530; border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+  .progress-pct { font-size: 0.8rem; color: #b5afa6; min-width: 36px; }
+
+  .btn-dl {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    transition: background 0.2s, transform 0.1s;
+    white-space: nowrap;
+  }
+  .btn-dl:hover { background: #a83609; }
+  .btn-dl:active { transform: scale(0.97); }
+
+  @media (max-width: 600px) {
+    .header, .name-bar, .scale-bar { padding-left: 20px; padding-right: 20px; }
+    .main { padding: 0 20px; }
+    .criteria-row { grid-template-columns: 1fr; gap: 10px; }
+    .score-select { min-width: 100%; }
+    .score-bar { padding: 12px 20px; }
+    .progress-track { width: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <h1>Zelf&shy;<span>evaluatie</span></h1>
+    <p>Beoordeel jezelf eerlijk op de onderstaande criteria. Kies per criterium de optie die het beste bij jou past.</p>
+  </div>
+</header>
+
+<div class="name-bar">
+  <div class="name-bar-inner">
+    <label for="studentName">Naam student</label>
+    <input type="text" id="studentName" placeholder="Vul hier je naam in…">
+  </div>
+</div>
+
+<div class="scale-bar">
+  <div class="scale-bar-inner">
+    <span class="scale-label">Schaal</span>
+    <div class="scale-options">
+      <span>Nee</span><span class="scale-sep">–</span>
+      <span>Redelijk</span><span class="scale-sep">–</span>
+      <span>Behoorlijk goed</span><span class="scale-sep">–</span>
+      <span>Hier heb ik nog vragen over</span>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+
+  <h2 class="deel-heading">Deel 1 – Onderzoek, plan en ontwerp</h2>
+  <p class="deel-sub">In dit deel laat je zien dat je strategisch kunt denken en je keuzes kunt onderbouwen.</p>
+
+  <div class="section-card">
+    <div class="section-title"><span class="section-num">1</span> Onderzoek</div>
+    <div class="criteria-row">
+      <div class="criteria-text">Ik kan duidelijk uitleggen wat dit merk uniek maakt (niet algemeen, maar specifiek).</div>
+      <select class="score-select" data-id="1" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Ik kan mijn doelgroep beschrijven als een echt persoon (leeftijd, gedrag, behoeften, motivatie).</div>
+      <select class="score-select" data-id="2" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Ik heb onderzocht wat concurrenten doen en kan uitleggen wat mijn merk anders doet.</div>
+      <select class="score-select" data-id="3" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Ik heb trends gekozen die echt invloed hebben op mijn doelgroep of merk (niet zomaar iets hip).</div>
+      <select class="score-select" data-id="4" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Ik heb mijn onderzoek afgesloten met duidelijke conclusies die richting geven aan mijn concept.</div>
+      <select class="score-select" data-id="5" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Ik heb relevante bronnen gebruikt en benoemd in mijn onderzoek.</div>
+      <select class="score-select" data-id="6" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title"><span class="section-num">2</span> Communicatieconcept</div>
+    <div class="criteria-row">
+      <div class="criteria-text">Ik kan mijn communicatieconcept in één duidelijke zin uitleggen.</div>
+      <select class="score-select" data-id="7" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Mijn concept sluit logisch aan op mijn doelgroep en merk.</div>
+      <select class="score-select" data-id="8" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Mijn concept is niet algemeen (zoals "verbinden" of "duurzaam"), maar concreet en herkenbaar.</div>
+      <select class="score-select" data-id="9" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Mijn concept geeft richting aan alle keuzes die ik daarna maak.</div>
+      <select class="score-select" data-id="10" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title"><span class="section-num">3</span> Creatief concept &amp; merkbelofte</div>
+    <div class="criteria-row">
+      <div class="criteria-text">Mijn creatief campagne-idee versterkt mijn communicatieconcept.</div>
+      <select class="score-select" data-id="11" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Mijn visualisatie van mijn concept past bij de merkbelofte.</div>
+      <select class="score-select" data-id="12" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Ik heb een duidelijk beeld van de visuele identiteit van het merk (brandsheet).</div>
+      <select class="score-select" data-id="13" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title"><span class="section-num">4</span> Campagne-acties &amp; mediaplan</div>
+    <div class="criteria-row">
+      <div class="criteria-text">Mijn acties passen bij mijn doelgroep (ik kies media waar zij echt komen).</div>
+      <select class="score-select" data-id="14" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Ik kan uitleggen waarom ik deze middelen inzet.</div>
+      <select class="score-select" data-id="15" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Mijn campagne-opbouw is logisch (wat gebeurt eerst, wat daarna?).</div>
+      <select class="score-select" data-id="16" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Mijn planning is realistisch.</div>
+      <select class="score-select" data-id="17" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+  </div>
+
+  <h2 class="deel-heading">Deel 2 – Realisatie &amp; Presentatie</h2>
+  <p class="deel-sub">In dit deel laat je zien dat je het kunt maken én overtuigend kunt presenteren.</p>
+
+  <div class="section-card">
+    <div class="section-title"><span class="section-num">5</span> Realisatie</div>
+    <div class="criteria-row">
+      <div class="criteria-text">Mijn uitingen passen duidelijk bij elkaar (één herkenbare ontwerplijn, één sfeer).</div>
+      <select class="score-select" data-id="18" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Mijn ontwerpen zijn technisch netjes uitgewerkt.</div>
+      <select class="score-select" data-id="19" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Mijn uitingen versterken samen de beleving van het merk.</div>
+      <select class="score-select" data-id="20" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Ik laat eigenheid in mijn gemaakte werk zien.</div>
+      <select class="score-select" data-id="21" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title"><span class="section-num">6</span> Presentatie</div>
+    <div class="criteria-row">
+      <div class="criteria-text">Mijn presentatie heeft een duidelijke opbouw (onderzoek → concept → uitwerking → campagne).</div>
+      <select class="score-select" data-id="22" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Ik kan mijn keuzes rustig en vakinhoudelijk uitleggen.</div>
+      <select class="score-select" data-id="23" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Ik raak niet in paniek bij kritische vragen, maar gebruik ze om mijn verhaal sterker te maken.</div>
+      <select class="score-select" data-id="24" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+    <div class="criteria-row">
+      <div class="criteria-text">Mijn presentatie ziet er verzorgd en professioneel uit.</div>
+      <select class="score-select" data-id="25" onchange="handleChange(this)"><option value="">– kies –</option><option>Nee</option><option>Redelijk</option><option>Behoorlijk goed</option><option>Hier heb ik nog vragen over</option></select>
+    </div>
+  </div>
+
+</main>
+
+<div class="score-bar">
+  <div class="score-info">
+    <div class="score-main">Score: <span id="scoreDisplay">0 / 50</span></div>
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-pct" id="progressPct">0%</div>
+    </div>
+  </div>
+  <button class="btn-dl" onclick="downloadExcel()">↓ Download als Excel</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+  const TOTAL = 25;
+  const SCORE_MAP = { 'Nee': 0, 'Redelijk': 1, 'Behoorlijk goed': 2, 'Hier heb ik nog vragen over': 1 };
+  const CLASS_MAP = { 'Nee': 'val-nee', 'Redelijk': 'val-redelijk', 'Behoorlijk goed': 'val-behoorlijk', 'Hier heb ik nog vragen over': 'val-vragen' };
+
+  function handleChange(sel) {
+    sel.className = 'score-select';
+    if (sel.value && CLASS_MAP[sel.value]) sel.classList.add(CLASS_MAP[sel.value]);
+    updateScore();
+  }
+
+  function getAnswers() {
+    return Array.from({ length: TOTAL }, (_, i) => {
+      const sel = document.querySelector(`.score-select[data-id="${i + 1}"]`);
+      return sel && sel.value ? sel.value : null;
+    });
+  }
+
+  function updateScore() {
+    const answers = getAnswers();
+    const filled = answers.filter(a => a !== null).length;
+    const score = answers.reduce((sum, a) => sum + (a ? SCORE_MAP[a] : 0), 0);
+    const maxScore = TOTAL * 2;
+    const pct = Math.round((score / maxScore) * 100);
+    document.getElementById('scoreDisplay').textContent = `${score} / ${maxScore} (${filled}/${TOTAL} ingevuld)`;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+  }
+
+  const criteriaData = [
+    { section: "Onderzoek", text: "Ik kan duidelijk uitleggen wat dit merk uniek maakt (niet algemeen, maar specifiek)." },
+    { section: "Onderzoek", text: "Ik kan mijn doelgroep beschrijven als een echt persoon (leeftijd, gedrag, behoeften, motivatie)." },
+    { section: "Onderzoek", text: "Ik heb onderzocht wat concurrenten doen en kan uitleggen wat mijn merk anders doet." },
+    { section: "Onderzoek", text: "Ik heb trends gekozen die echt invloed hebben op mijn doelgroep of merk (niet zomaar iets hip)." },
+    { section: "Onderzoek", text: "Ik heb mijn onderzoek afgesloten met duidelijke conclusies die richting geven aan mijn concept." },
+    { section: "Onderzoek", text: "Ik heb relevante bronnen gebruikt en benoemd in mijn onderzoek." },
+    { section: "Communicatieconcept", text: "Ik kan mijn communicatieconcept in één duidelijke zin uitleggen." },
+    { section: "Communicatieconcept", text: "Mijn concept sluit logisch aan op mijn doelgroep en merk." },
+    { section: "Communicatieconcept", text: "Mijn concept is niet algemeen (zoals \"verbinden\" of \"duurzaam\"), maar concreet en herkenbaar." },
+    { section: "Communicatieconcept", text: "Mijn concept geeft richting aan alle keuzes die ik daarna maak." },
+    { section: "Creatief concept & merkbelofte", text: "Mijn creatief campagne-idee versterkt mijn communicatieconcept." },
+    { section: "Creatief concept & merkbelofte", text: "Mijn visualisatie van mijn concept past bij de merkbelofte." },
+    { section: "Creatief concept & merkbelofte", text: "Ik heb een duidelijk beeld van de visuele identiteit van het merk (brandsheet)." },
+    { section: "Campagne-acties & mediaplan", text: "Mijn acties passen bij mijn doelgroep (ik kies media waar zij echt komen)." },
+    { section: "Campagne-acties & mediaplan", text: "Ik kan uitleggen waarom ik deze middelen inzet." },
+    { section: "Campagne-acties & mediaplan", text: "Mijn campagne-opbouw is logisch (wat gebeurt eerst, wat daarna?)." },
+    { section: "Campagne-acties & mediaplan", text: "Mijn planning is realistisch." },
+    { section: "Realisatie", text: "Mijn uitingen passen duidelijk bij elkaar (één herkenbare ontwerplijn, één sfeer)." },
+    { section: "Realisatie", text: "Mijn ontwerpen zijn technisch netjes uitgewerkt." },
+    { section: "Realisatie", text: "Mijn uitingen versterken samen de beleving van het merk." },
+    { section: "Realisatie", text: "Ik laat eigenheid in mijn gemaakte werk zien." },
+    { section: "Presentatie", text: "Mijn presentatie heeft een duidelijke opbouw (onderzoek → concept → uitwerking → campagne)." },
+    { section: "Presentatie", text: "Ik kan mijn keuzes rustig en vakinhoudelijk uitleggen." },
+    { section: "Presentatie", text: "Ik raak niet in paniek bij kritische vragen, maar gebruik ze om mijn verhaal sterker te maken." },
+    { section: "Presentatie", text: "Mijn presentatie ziet er verzorgd en professioneel uit." },
+  ];
+
+  function downloadExcel() {
+    const name = document.getElementById('studentName').value.trim() || 'Student';
+    const answers = getAnswers();
+    const score = answers.reduce((sum, a) => sum + (a ? SCORE_MAP[a] : 0), 0);
+    const maxScore = TOTAL * 2;
+
+    const rows = [
+      ["Zelfevaluatie – Campagne Assessment"],
+      ["Naam", name],
+      ["Datum", new Date().toLocaleDateString('nl-NL')],
+      [],
+      ["#", "Onderdeel", "Criterium", "Score", "Punten"],
+    ];
+
+    criteriaData.forEach((c, i) => {
+      const ans = answers[i] || '—';
+      const pts = answers[i] !== null ? SCORE_MAP[answers[i]] : '';
+      rows.push([i + 1, c.section, c.text, ans, pts]);
+    });
+
+    rows.push([]);
+    rows.push(["", "", "", "Totaalscore:", `${score} / ${maxScore}`]);
+    rows.push(["", "", "", "Percentage:", `${Math.round((score / maxScore) * 100)}%`]);
+
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.aoa_to_sheet(rows);
+    ws['!cols'] = [{ wch: 4 }, { wch: 28 }, { wch: 70 }, { wch: 30 }, { wch: 8 }];
+    XLSX.utils.book_append_sheet(wb, ws, "Zelfevaluatie");
+    XLSX.writeFile(wb, `zelfevaluatie_${name.replace(/\s+/g, '_')}.xlsx`);
+  }
+</script>
+</body>
+</html>
